@@ -9,11 +9,11 @@ const NavBar = () => {
         <span className="navbar-toggler-icon"></span>
       </button>
       <div className="collapse navbar-collapse" id="navbarNav">
-        <ul className="navbar-nav">
-          <li className="nav-item">
+        <ul className="navbar-nav ml-auto">
+          <li className="nav-item" style={{ padding: '5px' }}>
             <Link className="nav-link" to="/">Home</Link>
           </li>
-          <li className="nav-item">
+          <li className="nav-item" style={{ padding: '5px' }}>
             <Link className="nav-link" to="/add">Add Recipe</Link>
           </li>
         </ul>

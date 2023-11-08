@@ -4,19 +4,37 @@ import { Link } from 'react-router-dom';
 
 const RecipeList = () => {
   const [recipes, setRecipes] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  const apiBaseUrl = process.env.REACT_APP_API_URL || '';
 
   useEffect(() => {
     const fetchRecipes = async () => {
       try {
-        const response = await axios.get('/recipes');
+        const response = await axios.get(`${apiBaseUrl}/api/recipes`);
         setRecipes(response.data);
+        setLoading(false);
       } catch (error) {
         console.error('Error fetching data: ', error);
+        setError('Failed to fetch recipes.');
+        setLoading(false);
       }
     };
 
     fetchRecipes();
-  }, []);
+  }, [apiBaseUrl]);
+
+  if (loading) {
+    return <div>Loading recipes...</div>;
+  }
+
+  if (error) {
+    return <div>Error: {error}</div>;
+  }
+
+  if (recipes.length === 0) {
+    return <div>No recipes to display.</div>;
+  }
 
   return (
     <div className="container mt-5">
@@ -25,8 +43,7 @@ const RecipeList = () => {
         {recipes.map((recipe) => (
           <div className="col" key={recipe._id}>
             <div className="card h-100">
-              {/* Image placeholder in case there's no imageUrl in the recipe object */}
-              <img src={recipe.imageUrl || 'placeholder-image-url.jpg'} className="card-img-top" alt={recipe.name} />
+              {/* <img src={recipe.imageUrl || 'placeholder-image-url.jpg'} className="card-img-top" alt={recipe.name} /> */}
               <div className="card-body">
                 <h5 className="card-title">{recipe.name}</h5>
                 <p className="card-text">{recipe.description}</p>

@@ -16,7 +16,7 @@ const RecipeForm = () => {
     if (id) {
       const fetchRecipe = async () => {
         try {
-          const response = await axios.get(`/recipes/${id}`);
+          const response = await axios.get(`/api/recipes/${id}`);
           setFormData(response.data); // Set form data with fetched recipe data
         } catch (error) {
           console.error('Error fetching recipe: ', error);
@@ -39,9 +39,9 @@ const RecipeForm = () => {
     event.preventDefault();
     try {
       if (id) {
-        await axios.put(`/recipes/${id}`, formData);
+        await axios.put(`/api/recipes/${id}`, formData);
       } else {
-        await axios.post('/recipes', formData);
+        await axios.post('/api/recipes', formData);
       }
       navigate('/'); // Redirect to the home page after form submission
     } catch (error) {
