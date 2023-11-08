@@ -4,19 +4,22 @@ import {
   Routes,
   Route
 } from 'react-router-dom';
-import Home from './components/Home';
-import AddRecipe from './components/AddRecipe';
-import EditRecipe from './components/EditRecipe';
+import RecipeForm from './comp/RecipeForm';
+import RecipeList from './comp/RecipeList';
+import RecipeDetail from './comp/RecipeDetails';
+import NavBar from './comp/NavBar';
 
 function App() {
   return (
     <Router>
+      <NavBar/>
       <div>
         {/* Other components like Navbar can go here */}
         <Routes>
-          <Route path="/" element={<Home />} />
-          <Route path="/add" element={<AddRecipe />} />
-          <Route path="/edit/:id" element={<EditRecipe />} />
+          <Route path="/" element={<RecipeList />} />
+          <Route path="/add" element={<RecipeForm />} />
+          <Route path="/edit/:id" element={<RecipeForm />} />
+          <Route path="/recipe/:id" element={<RecipeDetail />} />
           {/* Add other routes here */}
         </Routes>
       </div>
